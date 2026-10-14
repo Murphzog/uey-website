@@ -1,0 +1,150 @@
+/* Urban Systems brand tokens v1.0
+   Import first. Rules live in brand-guidelines.md. */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap');
+
+:root {
+  /* Color: two colors, everything else is opacity */
+  --us-ink: #1e1e1e;
+  --us-paper: #ffffff;
+  --us-tint-light: #f1f1f1;
+  --us-tint-dark: #262626;
+  --us-ink-75: rgba(30, 30, 30, .75);
+  --us-ink-18: rgba(30, 30, 30, .18);
+  --us-paper-22: rgba(255, 255, 255, .22);
+
+  /* Type */
+  --us-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --us-font-serif: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+  --us-track-display: -0.061em;
+  --us-track-body: -0.03em;
+  --us-track-label: 0.12em;
+  --us-lh-display: 0.9;
+  --us-lh-serif: 1.08;
+  --us-lh-body: 1.3;
+  --us-fs-display: clamp(44px, 9.6vw, 136px);
+  --us-fs-title: clamp(40px, 7vw, 104px);
+  --us-fs-section: clamp(32px, 4.4vw, 56px);
+  --us-fs-list: clamp(22px, 3vw, 40px);
+  --us-fs-lead: clamp(20px, 2.2vw, 30px);
+  --us-fs-body: 16px;
+  --us-fs-label: 12px;
+
+  /* Spacing: 8px grid */
+  --us-u: 8px;
+  --us-xs: 4px;
+  --us-sm: 8px;
+  --us-md: 16px;
+  --us-lg: 32px;
+  --us-xl: 64px;
+  --us-2xl: 128px;
+  --us-margin: max(5vw, 40px);
+  --us-content: min(1200px, calc(100% - 2 * max(5vw, 40px)));
+  --us-gutter: clamp(16px, 2vw, 32px);
+  --us-section: clamp(64px, 8vw, 160px);
+
+  /* Radius */
+  --us-r-pill: 999px;
+  --us-r-chip: 24px;
+  --us-r-panel: 32px;
+  --us-r-module: 40px;
+
+  /* Motion */
+  --us-ease: cubic-bezier(.2, .8, .2, 1);
+  --us-t-enter: 800ms;
+  --us-t-expand: 700ms;
+
+  /* Frost (no shadows, ever) */
+  --us-frost-light: rgba(255, 255, 255, .62);
+  --us-frost-dark: rgba(30, 30, 30, .55);
+  --us-frost-night: rgba(255, 255, 255, .08);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--us-paper);
+  color: var(--us-ink);
+  font-family: var(--us-font-sans);
+  font-weight: 500;
+  font-size: var(--us-fs-body);
+  line-height: var(--us-lh-body);
+  letter-spacing: var(--us-track-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: var(--us-track-display); }
+h1 { font-size: var(--us-fs-display); line-height: var(--us-lh-display); }
+h2 { font-family: var(--us-font-serif); font-style: italic; font-weight: 400; font-size: var(--us-fs-section); line-height: var(--us-lh-serif); }
+
+/* Italic Baskerville highlight inside an Inter line */
+.us-hl { font-family: var(--us-font-serif); font-style: italic; font-weight: 400; font-size: .92em; }
+.us-label { font-size: var(--us-fs-label); letter-spacing: var(--us-track-label); text-transform: uppercase; }
+
+.us-wrap { width: var(--us-content); margin-inline: auto; }
+
+/* Buttons */
+.us-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 48px; padding: 8px 24px;
+  border: 0; border-radius: var(--us-r-pill);
+  background: var(--us-ink); color: var(--us-paper);
+  font: inherit; font-size: 16px; cursor: pointer;
+  transition: transform 200ms var(--us-ease);
+}
+.us-btn:hover { transform: translateY(-2px); }
+.us-btn--inverse { background: var(--us-paper); color: var(--us-ink); }
+.us-btn--outline { background: transparent; color: inherit; border: 1px solid currentColor; }
+
+/* Frosted glass: blur + fill + 1px edge. No box-shadow. */
+.us-glass {
+  background: var(--us-frost-light);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, .6);
+  color: var(--us-ink);
+}
+.us-glass-dark {
+  background: var(--us-frost-dark);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, .14);
+  color: var(--us-paper);
+}
+.us-glass-night {
+  background: var(--us-frost-night);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, .16);
+  color: var(--us-paper);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .us-glass { background: rgba(255, 255, 255, .92); }
+  .us-glass-dark { background: rgba(30, 30, 30, .92); }
+  .us-glass-night { background: rgba(38, 38, 38, .96); }
+}
+
+/* Module: one large rounded dark block inset from the edges */
+.us-module {
+  position: relative; overflow: hidden;
+  margin-inline: 16px; border-radius: var(--us-r-module);
+  background: var(--us-ink); color: var(--us-paper);
+  height: clamp(360px, 56vw, 720px);
+}
+
+/* Motion */
+@keyframes us-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes us-ping { 0% { transform: scale(.5); opacity: .8; } 100% { transform: scale(2.4); opacity: 0; } }
+@keyframes us-draw { from { stroke-dashoffset: 2400; } to { stroke-dashoffset: 0; } }
+.us-rise { animation: us-rise var(--us-t-enter) var(--us-ease) backwards; }
+.us-ping { transform-box: fill-box; transform-origin: center; animation: us-ping 2.8s ease-out infinite; }
+.us-draw { stroke-dasharray: 2400; animation: us-draw 2.6s var(--us-ease) backwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  .us-rise, .us-ping, .us-draw { animation: none; }
+  * { transition-duration: .01ms !important; }
+}
+
+/* Focus */
+:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Volunteer · Urban Education for Youth</title>
+<meta name="description" content="Become a Group Lead or join a group. Teach a short urban planning lesson in a Bend elementary classroom with your friends.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<a class="us-btn skip" href="#main">Skip to content</a>
+<header class="site">
+  <nav aria-label="Main">
+    <a class="lockup" href="index.html" aria-label="Urban Education for Youth, home">
+      <img src="assets/uey-icon-small-ink.svg" alt="">
+      <span class="wordmark">Urban Education for Youth</span>
+    </a>
+    <div class="navitems"><a class="navitem" href="index.html">Program</a><a class="navitem" href="volunteer.html" aria-current="page">Volunteer</a><a class="navitem" href="schools.html">Schools</a><a class="navitem" href="about.html">About</a></div>
+  </nav>
+</header>
+<main id="main">
+  <section class="hero">
+    <span class="eyebrow us-label us-rise">For high school students</span>
+    <h1 class="title us-rise">Bring your <span class="us-hl">friends</span></h1>
+    <div class="endorse us-rise" style="animation-delay:150ms"><img src="assets/urban-systems-icon-grey.png" alt="">An Urban Systems initiative</div>
+    <p class="lead us-rise" style="animation-delay:300ms">A 10 to 15 minute briefing, a classroom visit with your own group, and a thank-you hangout after. What the kids say goes into real city planning in Bend.</p>
+    <div class="actions us-rise" style="animation-delay:450ms">
+      <a class="us-btn" href="#interest">Express interest</a>
+      <a class="us-btn us-btn--outline" href="#roles">See the roles</a>
+    </div>
+  </section>
+
+  <div class="us-wrap">
+    <section class="sec" style="padding-top:0" aria-labelledby="h-get">
+      <h2 id="h-get">What you get</h2>
+      <ul class="rows">
+        <li><span class="n">Time</span><span class="t">A short ask</span><span class="d">A 10 to 15 minute briefing before each visit, then the visit itself.</span></li>
+        <li><span class="n">Group</span><span class="t">Go with your friends</span><span class="d">You pick who you go with. You can ask for a sibling's classroom.</span></li>
+        <li><span class="n">Day</span><span class="t">A day out of class</span><span class="d">Leave school to teach a short lesson and run an activity.</span></li>
+        <li><span class="n">After</span><span class="t">A thank-you hangout</span><span class="d">For everyone who visited.</span></li>
+        <li><span class="n">Record</span><span class="t">Service hours and résumé value</span><span class="d">Community service hours, and real planning work you can point to.</span></li>
+      </ul>
+    </section>
+
+    <section class="sec" id="roles" aria-labelledby="h-roles">
+      <h2 id="h-roles">Two ways in</h2>
+      <p class="intro">Start a group or join one.</p>
+      <ul class="rows">
+        <li><span class="n">Lead</span><span class="t">Group Lead</span><span class="d">Coordinates their own friend group. Brings the group to the briefing, then presents with them.</span></li>
+        <li><span class="n">Join</span><span class="t">Volunteer</span><span class="d">Joins a Group Lead's group for one or more visits.</span></li>
+      </ul>
+    </section>
+
+    <section class="sec" id="interest" aria-labelledby="h-int">
+      <h2 id="h-int">Express interest</h2>
+      <p class="intro">Tell us who you are and we'll follow up before the next briefing.</p>
+      <form class="form" data-form="volunteer" novalidate>
+        <div class="hp" aria-hidden="true"><label for="v-hp">Leave this empty</label><input id="v-hp" name="website" tabindex="-1" autocomplete="off"></div>
+        <div class="row2">
+          <div class="field"><label for="v-name">Your name</label><input class="input" id="v-name" name="name" required autocomplete="name"></div>
+          <div class="field"><label for="v-email">Email</label><input class="input" id="v-email" name="email" type="email" required autocomplete="email" placeholder="your@email.com"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="v-school">High school</label><input class="input" id="v-school" name="school" required></div>
+          <div class="field"><label for="v-grade">Grade</label><input class="input" id="v-grade" name="grade" inputmode="numeric"></div>
+        </div>
+        <fieldset class="field">
+          <legend>I want to</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" id="v-role-lead" name="role" value="Group Lead" checked><span>Be a Group Lead</span></label>
+            <label class="choice"><input type="radio" id="v-role-vol" name="role" value="Volunteer"><span>Join a group</span></label>
+          </div>
+        </fieldset>
+        <div class="field"><label for="v-friends">Who's in your group?</label><textarea class="input" id="v-friends" name="friends"></textarea><span class="hint">Optional. Names of friends you'd bring, or a sibling's classroom you'd like to visit.</span></div>
+        <div class="submit"><button class="us-btn" type="submit">Express interest</button><span class="status" role="status"></span></div>
+      </form>
+    </section>
+  </div>
+</main>
+<footer class="site">
+  <div class="us-wrap ftop">
+    <div class="fbrand">
+      <a class="lockup" href="index.html"><img src="assets/uey-icon-small-ink.svg" alt=""><span class="wordmark">Urban Education for Youth</span></a>
+      <p>High school volunteers teaching urban planning in elementary classrooms.</p>
+      <label class="wordmark" for="news-email" style="font-size:16px">Get visit updates</label>
+      <form class="news" data-form="newsletter" novalidate>
+        <div class="hp" aria-hidden="true"><label for="news-hp">Leave this empty</label><input id="news-hp" name="website" tabindex="-1" autocomplete="off"></div>
+        <input class="input" id="news-email" name="email" type="email" placeholder="your@email.com" required autocomplete="email">
+        <button class="us-btn" type="submit">Stay updated</button>
+        <span class="status fnote" role="status"></span>
+      </form>
+      <span class="fnote">Occasional. Only when a visit is scheduled.</span>
+    </div>
+    <div class="fcols">
+      <div class="fcol"><span class="us-label">Program</span><a class="lnk" href="index.html#how">How a visit works</a><a class="lnk" href="schools.html">Schools</a></div>
+      <div class="fcol"><span class="us-label">Volunteer</span><a class="lnk" href="volunteer.html#roles">Group Leads</a><a class="lnk" href="volunteer.html#interest">Express interest</a></div>
+      <div class="fcol"><span class="us-label">About</span><a class="lnk" href="about.html">About UEY</a><a class="lnk" href="about.html#contact">Contact</a></div>
+      <div class="fcol"><span class="us-label">Urban Systems</span><a class="lnk" href="https://urban-systems.org">urban-systems.org</a></div>
+    </div>
+  </div>
+  <div class="us-wrap fbot">
+    <span>© 2026 Urban Systems</span>
+    <a class="lnk" href="mailto:urbansystemsorganization@gmail.com">urbansystemsorganization@gmail.com</a>
+  </div>
+</footer>
+<script src="js/config.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

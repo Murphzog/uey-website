@@ -214,8 +214,16 @@ footer.site { margin-top: var(--us-section); border-top: 1px solid var(--us-rule
 .news { display: flex; gap: 8px; flex-wrap: wrap; }
 .news .input { flex: 1 1 200px; min-width: 0; width: auto; }
 .fnote { font-size: 14px; opacity: .75; }
-.fbot { padding: 24px 0; border-top: 1px solid var(--us-rule); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-size: 14px; }
+.fbot { padding: 24px 0; border-top: 1px solid var(--us-rule); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; font-size: 14px; }
 .fbot a { overflow-wrap: anywhere; }
+/* Social icons (Instagram, LinkedIn) beside the email in the bottom row */
+.fbot-end { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+.fsocial { display: flex; gap: 8px; }
+.fsocial a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: var(--us-r-pill); border: 1px solid var(--us-ink-18); color: inherit; transition: border-color 200ms var(--us-ease); }
+.fsocial a:hover { border-color: var(--us-ink); }
+.fsocial a:focus-visible { outline: 2px solid var(--us-ink); outline-offset: 2px; }
+.fsocial svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.fsocial .dot { fill: currentColor; stroke: none; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 @media (max-width: 480px) {

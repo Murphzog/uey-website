@@ -152,10 +152,11 @@ fieldset.field > legend { padding: 0; margin: 0 auto 12px; text-align: center; }
 .contact .addr { font-family: var(--us-font-serif); font-style: italic; font-weight: 400; overflow-wrap: anywhere; }
 .mailbig { display: inline-block; margin-top: 48px; padding-bottom: 8px; border-bottom: 1px solid var(--us-ink); font-family: var(--us-font-serif); font-style: italic; font-weight: 400; font-size: var(--us-fs-section); line-height: var(--us-lh-serif); letter-spacing: var(--us-track-display); overflow-wrap: anywhere; }
 .rows .d a { text-underline-offset: 3px; }
-/* Divider between a page's intro and its first section: a full-width line with the UEY mark in the middle */
-.divider { display: flex; align-items: center; gap: 24px; margin: 0 0 clamp(64px, 7vw, 96px); }
+/* Divider between a page's intro and its first section: a full-width line (optionally with the UEY mark in the middle) */
+.divider { display: flex; align-items: center; gap: 24px; margin: 0 calc(50% - 50vw) clamp(64px, 7vw, 96px); } /* runs edge to edge of the screen */
 .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--us-rule); }
 .divider img { width: 24px; height: 24px; flex: none; }
+.divider:empty { gap: 0; } /* plain line, no mark in the middle */
 /* "or" divider between the email address and the contact form */
 .or { margin: 48px 0; max-width: 720px; display: flex; align-items: center; gap: 24px; font-family: var(--us-font-serif); font-style: italic; font-weight: 400; font-size: var(--us-fs-lead); letter-spacing: var(--us-track-display); }
 .or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--us-rule); }

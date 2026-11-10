@@ -209,9 +209,9 @@
     a.addEventListener('click', function (e) { e.preventDefault(); });
   });
 
-  // Forms → Supabase Edge Function "submit-form" (see SETUP.md)
+  // Forms → Google Apps Script web app that saves to a Google Sheet (see SETUP.md)
   var cfg = window.UEY_CONFIG || {};
-  var endpoint = cfg.SUPABASE_URL ? cfg.SUPABASE_URL.replace(/\/+$/, '') + '/functions/v1/submit-form' : '';
+  var endpoint = cfg.FORMS_URL || '';
   var CONTACT = 'uey@urban-systems.org';
 
   var MESSAGES = {
@@ -244,18 +244,16 @@
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
       say('');
 
+      // Sent as plain text with no custom headers: Google's script endpoint can't answer the browser's
+      // pre-check for JSON requests. Google always replies 200, so success is read from the reply itself.
       fetch(endpoint, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': cfg.SUPABASE_ANON_KEY,
-          'Authorization': 'Bearer ' + cfg.SUPABASE_ANON_KEY
-        },
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(data)
       })
         .then(function (r) {
           return r.json().catch(function () { return {}; }).then(function (body) {
-            if (!r.ok) throw new Error(body.error || 'Request failed');
+            if (!r.ok || !body.ok) throw new Error(body.error || 'Request failed');
             return body;
           });
         })

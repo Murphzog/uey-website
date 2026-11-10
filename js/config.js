@@ -1,7 +1,5 @@
-// Form backend settings. Fill these in after setting up Supabase (see SETUP.md, step 4).
-// Both values are safe to publish: the anon key can only call the submit-form function,
-// and the database tables are locked so nobody can read submissions from the browser.
+// Form backend: the Google Apps Script web app URL (see SETUP.md, step 4).
+// It ends in /exec. It's safe to publish: the script only ever adds rows to the sheet.
 window.UEY_CONFIG = {
-  SUPABASE_URL: '',      // e.g. 'https://abcdefghijklmnop.supabase.co'
-  SUPABASE_ANON_KEY: ''  // Project Settings → API Keys → anon / publishable key
+  FORMS_URL: 'https://script.google.com/macros/s/AKfycbyhbBxk1osD7lLmgwijssNnAAh3fEKSBMm_7ydh-IE4k8MpiLOEF0EH6pUwAI5o2_FGGw/exec'
 };

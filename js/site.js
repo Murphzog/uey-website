@@ -204,6 +204,23 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(queue);
   })();
 
+  // Long text boxes grow with what's typed, so the whole message is always visible (never scrolls inside).
+  // The CSS min-height stays the smallest size; they shrink back when the form is cleared after sending.
+  Array.prototype.forEach.call(document.querySelectorAll('textarea'), function (t) {
+    var fit = function () {
+      var y = window.scrollY;          // collapsing to measure can shift the page; put it back after
+      var cs = getComputedStyle(t);
+      var borders = parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
+      t.style.height = 'auto';
+      t.style.height = (t.scrollHeight + borders) + 'px';
+      if (window.scrollY !== y) window.scrollTo(window.scrollX, y);
+    };
+    t.addEventListener('input', fit);
+    if (t.form) t.form.addEventListener('reset', function () { setTimeout(fit, 0); }); // after the reset clears it
+    window.addEventListener('resize', fit); // narrower boxes wrap onto more lines
+    fit();
+  });
+
   // Placeholder links (href="#") do nothing until they get a real page
   Array.prototype.forEach.call(document.querySelectorAll('a[href="#"]'), function (a) {
     a.addEventListener('click', function (e) { e.preventDefault(); });
@@ -214,12 +231,32 @@
   var endpoint = cfg.FORMS_URL || '';
   var CONTACT = 'uey@urban-systems.org';
 
+  // Success messages, shown with the animated check (.success-msg in each form)
   var MESSAGES = {
-    volunteer: 'Thanks. We got it and will follow up before the next briefing.',
-    visit: "Thanks. We got your request and will be in touch to find a time.",
-    newsletter: "Thanks. You're on the list.",
-    contact: "Thanks. Your message reached the UEY team, and we'll reply by email."
+    volunteer: "Got it. We'll follow up before the next briefing.",
+    visit: "Request sent. We'll be in touch to find a time.",
+    newsletter: "You're on the list.",
+    contact: "Message sent. We'll reply by email."
   };
+
+  // Show a form's success message and play its check animation. Called only after the server
+  // confirms the submission. Removing and re-adding .visible (with a reflow in between) replays
+  // the animation on a second success.
+  function showSuccess(form, message) {
+    var box = form.querySelector('.success-msg');
+    if (!box) return false;
+    var text = box.querySelector('.success-text');
+    box.classList.remove('visible');
+    void box.offsetWidth; // force a reflow so the animation starts over
+    if (text) text.textContent = '';
+    box.classList.add('visible');
+    if (text) text.textContent = message; // set after showing, so screen readers announce it
+    return true;
+  }
+  function hideSuccess(form) {
+    var box = form.querySelector('.success-msg');
+    if (box) box.classList.remove('visible');
+  }
 
   Array.prototype.forEach.call(document.querySelectorAll('form[data-form]'), function (f) {
     var type = f.getAttribute('data-form');
@@ -231,6 +268,7 @@
 
     f.addEventListener('submit', function (e) {
       e.preventDefault();
+      hideSuccess(f); // a new attempt clears the last success; it only comes back if this one works
       if (!f.checkValidity()) { f.reportValidity(); return; }
 
       if (!endpoint) {
@@ -259,7 +297,9 @@
         })
         .then(function () {
           f.reset();
-          say(MESSAGES[type] || 'Thanks. We got it.');
+          var message = MESSAGES[type] || 'Thanks. We got it.';
+          say('');
+          if (!showSuccess(f, message)) say(message); // a form without .success-msg falls back to plain text
         })
         .catch(function (err) {
           var specific = err && err.message && /^Please /.test(err.message);

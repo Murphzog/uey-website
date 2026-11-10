@@ -1,0 +1,5 @@
+# Original photo files (the site uses the web copies in assets/photos)
+web_assets/
+
+# Local editor settings
+.vscode/

@@ -10,6 +10,7 @@ img { max-width: 100%; }
 .lnk { text-decoration: none; transition: opacity 200ms var(--us-ease); }
 .lnk:hover { opacity: .5; }
 .us-btn { text-decoration: none; }
+.us-btn--gray { background: var(--us-tint-dark); color: var(--us-paper); }
 h1, h2 { text-wrap: balance; }
 
 /* Skip link */
@@ -21,6 +22,8 @@ header.site nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
 .lockup { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; margin-right: 16px; min-height: 44px; }
 .lockup img { width: 32px; height: 32px; }
 .wordmark { font-family: var(--us-font-serif); font-style: italic; font-weight: 400; font-size: 20px; letter-spacing: var(--us-track-display); }
+/* Optical centering: drop the wordmark so its capitals sit in the middle of the icon (about 1.25px at 20px) */
+.lockup .wordmark { position: relative; top: .0625em; }
 .navitems { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 .navitem { display: inline-flex; align-items: center; min-height: 44px; padding: 12px 16px; border-radius: var(--us-r-pill); text-decoration: none; transition: background 200ms var(--us-ease), color 200ms var(--us-ease); }
 .navitem:hover, .navitem[aria-current="page"] { background: var(--us-ink); color: var(--us-paper); }
@@ -29,11 +32,14 @@ header.site nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
 .hero { padding: 96px 16px 96px; text-align: center; }
 .hero h1 { max-width: 1100px; margin: 0 auto; }
 .hero h1.title { font-size: var(--us-fs-title); }
+.hero h1.tagline { font-size: min(4.8vw, 64px); white-space: nowrap; }
 .endorse { margin-top: 24px; display: inline-flex; align-items: center; gap: 8px; font-family: var(--us-font-serif); font-style: italic; font-weight: 400; font-size: clamp(20px, 2vw, 28px); letter-spacing: var(--us-track-display); }
 .endorse img { width: 24px; height: 24px; }
+.lead.lead--sans { font-family: var(--us-font-sans); }
 .lead { font-family: var(--us-font-serif); font-weight: 400; font-size: var(--us-fs-lead); line-height: var(--us-lh-serif); letter-spacing: var(--us-track-display); max-width: 720px; margin: 32px auto 0; }
 .actions { margin-top: 48px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-.eyebrow { display: block; margin-bottom: 24px; opacity: .75; }
+/* Gray via color, not opacity, so the blur-fade entrance (which ends at opacity 1) has nothing to snap back to */
+.eyebrow { display: block; margin-bottom: 24px; color: var(--us-ink-75); }
 
 /* Module: Aperture expansion (circle opens to full width) */
 .stage { position: relative; height: clamp(360px, 56vw, 720px); }
@@ -53,47 +59,150 @@ header.site nav { display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
 .sec .intro { max-width: 640px; font-size: 20px; margin: 0; }
 .sec .intro + .intro { margin-top: 16px; }
 ol.rows, ul.rows { list-style: none; margin: 48px 0 0; padding: 0; }
-.rows li { display: flex; flex-wrap: wrap; gap: 8px 32px; align-items: baseline; padding: 24px 0; border-top: 1px solid var(--us-ink-18); }
-.rows li:last-child { border-bottom: 1px solid var(--us-ink-18); }
+.rows li { display: flex; flex-wrap: wrap; gap: 8px 32px; align-items: baseline; padding: 24px 0; border-top: 1px solid var(--us-rule); }
+.rows li:last-child { border-bottom: 1px solid var(--us-rule); }
 .rows .n { width: 48px; flex: none; font-family: var(--us-font-serif); font-style: italic; font-weight: 400; opacity: .75; }
 .rows .t { flex: 1 1 280px; min-width: 0; font-size: var(--us-fs-list); line-height: 1.1; letter-spacing: var(--us-track-display); }
 .rows .d { flex: 1 1 320px; min-width: 0; max-width: 480px; opacity: .75; }
 .rows a.t { text-decoration: none; }
+
+/* Card panel (Schools "Who is UEY for?", Volunteer "What you get"): light tint, faint street grid, white cards. No shadows (brand rule). */
+.panel { position: relative; overflow: hidden; padding: clamp(32px, 5vw, 64px); border-radius: var(--us-r-module); background: var(--us-tint-light); }
+.panel-map { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--us-ink); stroke-width: 1.5; opacity: .08; }
+.panel h2 { position: relative; margin: 0 0 32px; }
+.panel-cards { position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.panel-card { display: flex; align-items: flex-start; gap: 20px; padding: 32px; border-radius: var(--us-r-panel); background: var(--us-paper); }
+.panel-card > svg { flex: none; width: 48px; height: 48px; fill: none; stroke: var(--us-ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.panel-card h3 { margin: 0; font-size: clamp(20px, 2vw, 26px); font-weight: 500; line-height: 1.1; letter-spacing: var(--us-track-display); }
+.panel-card p { margin: 8px 0 0; opacity: .75; }
+/* Clickable cards (home "Explore UEY"): the whole card is the link. Hover outlines the card and nudges the arrow. */
+.panel-cards > li { display: flex; }
+.panel-card--link { flex: 1; color: inherit; text-decoration: none; border: 1px solid transparent; transition: border-color 200ms var(--us-ease); }
+.panel-card--link:hover { border-color: var(--us-ink); }
+.panel-card--link:focus-visible { outline: 2px solid var(--us-ink); outline-offset: 2px; }
+.panel-card--link:hover .program-arrow, .panel-card--link:focus-visible .program-arrow { transform: translateX(6px); }
+
+/* Flow map: numbered steps in staggered columns, joined by elbow arrows */
+.flow { position: relative; margin-top: 48px; padding-bottom: 16px; }
+/* Elbow arrows are drawn by js/site.js: solid brand dark gray, rounded elbows, open chevron heads */
+.flow-line { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; fill: none; stroke: var(--us-tint-dark); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sec.sec--tight { padding-top: clamp(64px, 7vw, 96px); }
+/* Steps sit in equal columns, each dropped by its own --y. The map's height follows its tallest step,
+   so text never spills into the next section. */
+.flow-steps { list-style: none; margin: 0; padding: 24px 0 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); column-gap: 24px; align-items: start; }
+.flow-step { position: relative; margin-top: var(--y, 0px); padding-left: 24px; }
+.flow-num { position: absolute; left: 24px; top: 0; transform: translate(-50%, -50%); display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--us-ink); color: var(--us-paper); font-family: var(--us-font-serif); font-style: italic; font-size: 20px; }
+.flow-body { padding-left: 40px; margin-top: -14px; }
+.flow-body h3 { margin: 0; font-size: clamp(22px, 2.4vw, 32px); font-weight: 500; line-height: 1.1; letter-spacing: var(--us-track-display); }
+.flow-body p { margin: 8px 0 0; max-width: 320px; opacity: .75; }
+/* Row variant (Schools): steps on one line, arrows alternate over the top and under the bottom. Extra room above and below for them. */
+.flow--row .flow-steps { padding-top: 64px; }
+.flow--row { padding-bottom: 56px; }
+@media (max-width: 760px) {
+  .flow-line { display: none; }
+  .flow-steps { display: block; position: relative; }
+  .flow-step { margin-top: 0 !important; padding-bottom: 48px; }
+}
+/* Globs (About "Why it exists"): centered text blocks nudged left/right as they go down. Set --shift per item. */
+/* Boxes span the full page column so left and right line up with the page edges */
+.globs { list-style: none; margin: 64px 0 0; padding: 0; display: flex; flex-direction: column; gap: 56px; }
+.glob { max-width: 440px; margin-inline: auto; text-align: center; }
+/* Alternate sides down the column; a plain .glob stays centered */
+.glob--left { margin-left: 0; text-align: left; }
+.glob--right { margin-right: 0; text-align: right; }
+.glob h3 { margin: 0; font-size: var(--us-fs-list); font-weight: 500; line-height: 1.1; letter-spacing: var(--us-track-display); }
+.glob p { margin: 12px 0 0; font-size: 20px; line-height: 1.4; }
+.glob .us-hl { font-size: 1.05em; }
 .cta-line { margin-top: 48px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; font-size: 20px; }
 .cta-line .us-btn { font-family: var(--us-font-serif); font-style: italic; font-weight: 400; font-size: 20px; letter-spacing: var(--us-track-display); }
 .placeholder { margin-top: 32px; padding: 32px; border: 1px dashed var(--us-ink-18); border-radius: var(--us-r-chip); opacity: .75; }
 
-/* Forms */
-.form { margin-top: 48px; display: flex; flex-direction: column; gap: 24px; max-width: 720px; }
-.field { display: flex; flex-direction: column; gap: 8px; }
-.field label, .field legend { font-size: 16px; }
+/* Forms: tinted panel, choice pills centered on top, small uppercase labels, white pill inputs,
+   and a bottom row with a note on the left and the send button on the right. */
+.form { margin-top: 48px; display: flex; flex-direction: column; gap: 24px; padding: clamp(32px, 5vw, 80px); border-radius: var(--us-r-module); background: var(--us-tint-light); text-align: left; }
+.field { display: flex; flex-direction: column; gap: 12px; }
+.field > label, .field > legend { font-size: var(--us-fs-label); letter-spacing: var(--us-track-label); text-transform: uppercase; }
 .field .hint { font-size: 14px; opacity: .75; }
 .row2 { display: flex; flex-wrap: wrap; gap: 24px; }
 .row2 > .field { flex: 1 1 280px; min-width: 0; }
 .input { min-height: 48px; padding: 0 20px; border-radius: var(--us-r-pill); border: 1px solid var(--us-ink); background: transparent; color: inherit; font: inherit; width: 100%; }
-textarea.input { border-radius: var(--us-r-chip); padding: 16px 20px; min-height: 128px; resize: vertical; }
 .input::placeholder { color: var(--us-ink); opacity: .6; }
-fieldset.field { border: 0; margin: 0; padding: 0; }
-.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.form .input { min-height: 56px; padding: 0 24px; border-color: var(--us-ink-18); background: var(--us-paper); font-size: 18px; transition: border-color 200ms var(--us-ease); }
+.form .input:hover, .form .input:focus { border-color: var(--us-ink); }
+.form .input:focus-visible { outline: 2px solid var(--us-ink); outline-offset: 2px; }
+.form textarea.input { border-radius: var(--us-r-panel); padding: 16px 24px; min-height: 160px; resize: vertical; }
+fieldset.field { border: 0; margin: 0 0 8px; padding: 0; min-width: 0; }
+fieldset.field > legend { padding: 0; margin: 0 auto 12px; text-align: center; }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 .choice { position: relative; }
 .choice input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
-.choice span { display: inline-flex; align-items: center; min-height: 48px; padding: 8px 24px; border: 1px solid var(--us-ink); border-radius: var(--us-r-pill); transition: background 200ms var(--us-ease), color 200ms var(--us-ease); }
-.choice input:checked + span { background: var(--us-ink); color: var(--us-paper); }
+.choice span { display: inline-flex; align-items: center; min-height: 48px; padding: 8px 24px; border: 1px solid var(--us-ink-18); border-radius: var(--us-r-pill); font-size: 18px; transition: background 200ms var(--us-ease), color 200ms var(--us-ease), border-color 200ms var(--us-ease); }
+.choice:hover span { border-color: var(--us-ink); }
+.choice input:checked + span { background: var(--us-ink); border-color: var(--us-ink); color: var(--us-paper); }
 .choice input:focus-visible + span { outline: 2px solid var(--us-ink); outline-offset: 2px; }
-.form .submit { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.form .submit { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; margin-top: 24px; }
+.submit-note { display: flex; flex-direction: column; gap: 4px; font-size: 18px; }
+.form .submit .us-btn { min-height: 56px; padding: 8px 32px; gap: 12px; font-size: 18px; }
+.form .submit .us-btn svg { flex: none; }
+@media (max-width: 480px) { .form .submit .us-btn { width: 100%; justify-content: center; } }
 .status { font-family: var(--us-font-serif); font-style: italic; font-weight: 400; font-size: 18px; letter-spacing: var(--us-track-body); }
 
 /* Contact line */
 .contact { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; font-size: 20px; }
 .contact .addr { font-family: var(--us-font-serif); font-style: italic; font-weight: 400; overflow-wrap: anywhere; }
+.mailbig { display: inline-block; margin-top: 48px; padding-bottom: 8px; border-bottom: 1px solid var(--us-ink); font-family: var(--us-font-serif); font-style: italic; font-weight: 400; font-size: var(--us-fs-section); line-height: var(--us-lh-serif); letter-spacing: var(--us-track-display); overflow-wrap: anywhere; }
+.rows .d a { text-underline-offset: 3px; }
+/* Divider between a page's intro and its first section: a full-width line with the UEY mark in the middle */
+.divider { display: flex; align-items: center; gap: 24px; margin: 0 0 clamp(64px, 7vw, 96px); }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--us-rule); }
+.divider img { width: 24px; height: 24px; flex: none; }
+/* "or" divider between the email address and the contact form */
+.or { margin: 48px 0; max-width: 720px; display: flex; align-items: center; gap: 24px; font-family: var(--us-font-serif); font-style: italic; font-weight: 400; font-size: var(--us-fs-lead); letter-spacing: var(--us-track-display); }
+.or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--us-rule); }
 
 /* Co-brand pair (section 15): same height, 1px hairline between */
 .pair { margin-top: 48px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
 .pair img { width: 48px; height: 48px; }
 .pair .rule { width: 1px; height: 48px; background: var(--us-ink); }
 
+/* Programs: one compact linked entry per school visit. Hover reveals "See more". */
+.programs { list-style: none; margin: 32px 0 0; padding: 0; max-width: 720px; }
+.sec--right .programs { margin-left: auto; }
+.sec--center .programs { margin-inline: auto; }
+.program-link { display: flex; align-items: center; gap: 24px 32px; padding: 24px 0; color: inherit; text-decoration: none; }
+.sec--right .program-link { flex-direction: row-reverse; }
+.sec--center .program-link { justify-content: center; }
+.sec--center .program-body { flex: 0 1 auto; text-align: left; }
+.program-link:focus-visible { outline: 2px solid var(--us-ink); outline-offset: 4px; border-radius: var(--us-r-chip); }
+.program-photo { flex: 0 0 120px; display: block; overflow: hidden; border-radius: var(--us-r-chip); }
+.program-photo img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; transition: transform 500ms var(--us-ease); }
+.program-body { flex: 1 1 auto; min-width: 0; }
+.program h3 { margin: 0; font-size: clamp(22px, 2.4vw, 32px); font-weight: 500; line-height: 1.1; letter-spacing: var(--us-track-display); }
+.program-arrow { display: inline-block; width: .8em; height: .8em; margin-left: 8px; vertical-align: -0.05em; fill: none; stroke: currentColor; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; transition: transform 300ms var(--us-ease); }
+.program-more { display: block; margin-top: 8px; font-family: var(--us-font-serif); font-style: italic; font-size: 18px; letter-spacing: var(--us-track-body); opacity: 0; transform: translateY(-6px); transition: opacity 300ms var(--us-ease), transform 300ms var(--us-ease); }
+.program-link:hover .program-photo img, .program-link:focus-visible .program-photo img { transform: scale(1.06); }
+.program-link:hover .program-arrow, .program-link:focus-visible .program-arrow { transform: translateX(6px); }
+.program-link:hover .program-more, .program-link:focus-visible .program-more { opacity: .75; transform: none; }
+@media (hover: none) { .program-more { opacity: .75; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .program-photo img, .program-arrow, .program-more { transition: none; } }
+
+/* Section alignment. Sections alternate left, right and center so each page balances
+   around the centered hero. Left is the default; add .sec--center or .sec--right. */
+.sec--center { text-align: center; }
+.sec--center .intro, .sec--center .or, .sec--center .form { margin-inline: auto; }
+.sec--center .cta-line, .sec--center .contact, .sec--center .pair { justify-content: center; }
+.sec--center .rows li { flex-direction: column; align-items: center; gap: 8px; }
+.sec--center .rows .n { width: auto; }
+.sec--center .rows .t, .sec--center .rows .d { flex: none; }
+
+.sec--right { text-align: right; }
+.sec--right .intro, .sec--right .or, .sec--right .form { margin-left: auto; }
+.sec--right .cta-line, .sec--right .contact, .sec--right .pair { justify-content: flex-end; }
+.sec--right .flow { text-align: left; }
+.sec--right .rows li { flex-direction: row-reverse; }
+
 /* Footer */
-footer.site { margin-top: var(--us-section); border-top: 1px solid var(--us-ink-18); }
+footer.site { margin-top: var(--us-section); border-top: 1px solid var(--us-rule); }
 .ftop { padding: 64px 0 48px; display: flex; flex-wrap: wrap; gap: 48px 64px; justify-content: space-between; }
 .fbrand { flex: 1 1 320px; max-width: 420px; display: flex; flex-direction: column; gap: 16px; }
 .fbrand .lockup { margin: 0; }
@@ -105,7 +214,7 @@ footer.site { margin-top: var(--us-section); border-top: 1px solid var(--us-ink-
 .news { display: flex; gap: 8px; flex-wrap: wrap; }
 .news .input { flex: 1 1 200px; min-width: 0; width: auto; }
 .fnote { font-size: 14px; opacity: .75; }
-.fbot { padding: 24px 0; border-top: 1px solid var(--us-ink-18); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-size: 14px; }
+.fbot { padding: 24px 0; border-top: 1px solid var(--us-rule); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-size: 14px; }
 .fbot a { overflow-wrap: anywhere; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
@@ -119,3 +228,26 @@ footer.site { margin-top: var(--us-section); border-top: 1px solid var(--us-ink-
 /* Spam trap: hidden from people, visible to bots */
 .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .us-btn:disabled { opacity: .5; cursor: progress; transform: none; }
+
+/* Two-column card grid (Volunteer "What you get") */
+.panel-cards--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 760px) { .panel-cards--2 { grid-template-columns: 1fr; } }
+
+/* Smooth jump for in-page buttons like "Express interest ↓" */
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* Blur fade: content sharpens from a soft blur while fading in. Nothing moves.
+   1. Page-load entrance for hero content. "backwards" hides it during its delay, then hands back to normal styles. */
+@keyframes rise { from { opacity: 0; filter: blur(14px); } to { opacity: 1; filter: none; } }
+.rise { animation: rise .45s ease backwards; }
+
+/* 2. Scroll reveal (js/site.js). Content is hidden only once the script has added .rv-io to <html>,
+   so it stays visible if JavaScript fails. Content already on screen gets .rv-on and is never hidden. */
+@keyframes rvBlur { from { opacity: 0; filter: blur(14px); } to { opacity: 1; filter: none; } }
+.rv-io .rv:not(.rv-in):not(.rv-on) { opacity: 0; filter: blur(14px); }
+.rv-io .rv.rv-in { animation: rvBlur .45s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; }
+  .rv-io .rv { opacity: 1 !important; filter: none !important; animation: none !important; }
+}

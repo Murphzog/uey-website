@@ -12,6 +12,7 @@
   --us-ink-75: rgba(30, 30, 30, .75);
   --us-ink-18: rgba(30, 30, 30, .18);
   --us-paper-22: rgba(255, 255, 255, .22);
+  --us-rule: var(--us-tint-dark); /* solid dark gray for every divider line */
 
   /* Type */
   --us-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
